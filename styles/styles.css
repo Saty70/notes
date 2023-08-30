@@ -13,18 +13,22 @@ body{
     padding-bottom: 30px;
 }
 
-.header{    
+
+.header{ 
     padding-top: 15px;
+    width: 100%;   
     background-color: #2C3A47;
     color: bisque;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Special Elite', cursive;
+    font-weight: bold;
 }
 
 .title{
     font-size: 2rem;
+    /*text-shadow: 2px 0 #ea8685, -2px 0 #ea8685, 0 2px #ea8685, 0 -2px #ea8685,1px 1px #ea8685, -1px -1px #ea8685, 1px -1px #ea8685, -1px 1px #ea8685;*/
 }
 
 .Addbtn{
@@ -41,6 +45,7 @@ body{
     font-size: 0.7rem;
     cursor: pointer;
     transition: 3s;
+    box-shadow: 1px 1px 1px #58B19F;
 }
 
 .btn1{
@@ -68,6 +73,7 @@ body{
     border:#182C61 solid;
     border-top: none;
     border-radius: 21px 0px 20px 20px;
+    box-shadow: 5px 5px 5px #2C3A47;
 }
 
 .tool{
