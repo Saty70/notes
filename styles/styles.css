@@ -24,11 +24,19 @@ body{
     align-items: center;
     font-family: 'Special Elite', cursive;
     font-weight: bold;
+    transition: ease-in-out 0.5s;
 }
 
 .title{
     font-size: 2rem;
+    transition: ease-in-out 0.5s;
     /*text-shadow: 2px 0 #ea8685, -2px 0 #ea8685, 0 2px #ea8685, 0 -2px #ea8685,1px 1px #ea8685, -1px -1px #ea8685, 1px -1px #ea8685, -1px 1px #ea8685;*/
+}
+
+.title:hover{
+    transform: translateY(3px);
+    transition: ease-in-out 0.5s;
+    color: #58B19F;
 }
 
 .Addbtn{
@@ -44,7 +52,12 @@ body{
     border-radius: 7px;
     font-size: 0.7rem;
     cursor: pointer;
-    transition: 3s;
+    transition: ease-in-out 2s;
+    box-shadow: 1px 1px 1px bisque /*#58B19F;*/
+}
+
+.Addbtn:hover{
+    transition: ease-in-out 1s;
     box-shadow: 1px 1px 1px #58B19F;
 }
 
@@ -90,6 +103,12 @@ body{
     font-size: 1.5rem;
     padding-left: 1rem;
     cursor: pointer;
+    transition: ease-in-out 0.2s;
+}
+
+.tool i:hover{
+    transform: translateY(-2px);
+    transition: ease-in-out 0.2s;
 }
 
 .note textarea{
