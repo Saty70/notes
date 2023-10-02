@@ -37,6 +37,7 @@ body{
     transform: translateY(3px);
     transition: ease-in-out 20s;
     color: #58B19F;
+    cursor: default;
 }
 
 .Addbtn{
