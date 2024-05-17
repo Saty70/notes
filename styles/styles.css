@@ -186,6 +186,24 @@ body::-webkit-scrollbar {
     width: 0px;
 }
 
+.signout{
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 2px;
+    background-color: #182c61;
+    color: aliceblue;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    cursor: pointer;
+}
+
+.signout i{
+    font-size: 1.3rem;
+    padding: 3px;
+}
+
 @media (max-width: 680px) {
     .Addbtn {
         display: none;

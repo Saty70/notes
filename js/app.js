@@ -2,6 +2,23 @@ const Addbtn = document.querySelector("#Addbtn");
 const Addbtn1 = document.querySelector("#Addbtn1");
 const main = document.querySelector("#main");
 
+let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"))
+let UserInfo = JSON.parse(sessionStorage.getItem("user-info"))
+
+let SignOut = () =>{
+    sessionStorage.removeItem("user-creds");
+    sessionStorage.removeItem("user-info");
+    window.location.href = 'index.html'
+}
+
+let CheckCred = () =>{
+    if(!sessionStorage.getItem("user-creds"))
+        window.location.href = 'index.html'
+}
+
+window.addEventListener('load',CheckCred);
+signoutbutton.addEventListener('click',SignOut);
+
 const saveNotes = () => {
     const notes = document.querySelectorAll(".note");
     const data = [];
