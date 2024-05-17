@@ -9,8 +9,7 @@ const saveNotes = () => {
         const notetitle = note.querySelector(".notetitle");
         const textarea = note.querySelector(".textarea");
         const timestamp = note.querySelector(".timestamp").innerText;
-        const pinned = note.classList.contains("pinned");
-        data.push({ text1: notetitle.value, timestamp: timestamp, text: textarea.value, pinned: pinned });
+        data.push({ text1: notetitle.value, timestamp: timestamp, text: textarea.value });
     });
     if (data.length === 0) {
         localStorage.removeItem("notes");
@@ -32,14 +31,12 @@ Addbtn1.addEventListener(
     }
 );
 
-const addNote = (text1 = "untitled note", timestamp = new Date().toLocaleString(), text = "", pinned = false) => {
+const addNote = (text1 = "untitled note", timestamp = new Date().toLocaleString(), text = "") => {
     const note = document.createElement("div");
     note.classList.add("note");
-    if (pinned) note.classList.add("pinned");
     note.innerHTML = `
         <div class="tool">
             <div class="ltools">
-                <i class="pin fa-solid fa-thumbtack" style="color: #d1e2ff; transform: ${pinned ? 'rotate(0)' : 'rotate(45deg)'};"></i>
                 <textarea class="notetitle">${text1}</textarea>
                 <div class="timestamp">${timestamp}</div>
             </div>    
@@ -50,18 +47,14 @@ const addNote = (text1 = "untitled note", timestamp = new Date().toLocaleString(
         </div>
         <textarea class='textarea'>${text}</textarea>
     `;
+
     setTimeout(() => {
         note.classList.add("visible");
     }, 50);
-    
+
     note.querySelector(".trash").addEventListener(
         "click",
         function () {
-            if (note.classList.contains("pinned")) {
-                if (!confirm("Are you sure you want to delete this pinned note?")) {
-                    return;
-                }
-            }
             note.remove();
             saveNotes();
         }
@@ -78,36 +71,7 @@ const addNote = (text1 = "untitled note", timestamp = new Date().toLocaleString(
             saveNotes();
         }
     );
-    note.querySelector(".pin").addEventListener(
-        "click",
-        function () {
-            togglePin(note);
-        }
-    );
-    
-    const pinnedNotes = main.querySelectorAll(".note.pinned");
-    if (!pinned) {
-        // Find the first unpinned note and insert before it
-        let unpinnedNote = null;
-        for (const child of main.children) {
-            if (!child.classList.contains("pinned")) {
-                unpinnedNote = child;
-                break;
-            }
-        }
-        if (unpinnedNote) {
-            main.insertBefore(note, unpinnedNote);
-        } else {
-            main.appendChild(note);
-        }
-    } else {
-        if (pinnedNotes.length > 0) {
-            main.insertBefore(note, pinnedNotes[0]);
-        } else {
-            main.appendChild(note);
-        }
-    }
-    
+    main.prepend(note);  // Change from appendChild to prepend
     saveNotes();
     focusOnTextarea(note.querySelector(".textarea"));
 };
@@ -126,32 +90,13 @@ const focusOnTopNote = () => {
     }
 };
 
-const togglePin = (note) => {
-    const pinnedNotes = main.querySelectorAll(".note.pinned");
-    const pinIcon = note.querySelector(".pin");
-    if (note.classList.contains("pinned")) {
-        note.classList.remove("pinned");
-        pinIcon.style.transform = "rotate(45deg)";
-        main.appendChild(note);
-    } else {
-        if (pinnedNotes.length >= 3) {
-            alert("You can only pin a maximum of 3 notes.");
-            return;
-        }
-        note.classList.add("pinned");
-        pinIcon.style.transform = "rotate(0)";
-        main.prepend(note);
-    }
-    saveNotes();
-};
-
 (function () {
     const lsNotes = JSON.parse(localStorage.getItem("notes"));
     if (lsNotes === null) {
         addNote();
     } else {
         lsNotes.reverse().forEach((lsNote) => {
-            addNote(lsNote.text1, lsNote.timestamp, lsNote.text, lsNote.pinned);
+            addNote(lsNote.text1, lsNote.timestamp, lsNote.text);
         });
     }
     focusOnTopNote(); // Call focus function after loading notes
