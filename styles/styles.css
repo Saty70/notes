@@ -86,12 +86,13 @@ body {
 }
 
 .timestamp {
-    margin-left: 2rem;
-    font-size: 1.1rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
     border: none;
 }
 
 .notetitle {
+    margin-left: 1rem;
     background-color: transparent;
     border: none;
     resize: none;
@@ -100,16 +101,18 @@ body {
     width: auto;
     max-width: 15ch;
     white-space: nowrap;
-    overflow-x: auto;
+    overflow: hidden;
     display: inline-block;
     height: 2rem;
     outline: none;
-    align-self: flex-end;
+    align-self: baseline;
+    text-overflow: ellipsis;
 }
+
 
 .note {
     width: 100%;
-    height: 420px;
+    height: 400px;
     background-color: cornsilk;
     margin: 25px;
     margin-top: 55px;
@@ -117,8 +120,15 @@ body {
     border-top: none;
     border-radius: 21px 0px 20px 20px;
     box-shadow: 5px 5px 5px #2C3A47;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0; /* Start with opacity 0 */
+    transform: translateY(-20px); 
 }
 
+.note.visible {
+    opacity: 1; /* Change opacity to 1 for visibility */
+    transform: translateY(0); /* Reset translation */
+}
 .tool {
     width: 100%;
     background-color: #2C3A47;
